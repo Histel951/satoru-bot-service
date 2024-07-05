@@ -1,3 +1,7 @@
 import { CommandInteraction } from "discord.js";
 
-export type CommandT = (interaction: CommandInteraction) => void
+export interface CommandI {
+    name: string
+    description: string
+    execute: (interaction: CommandInteraction) => void
+}
