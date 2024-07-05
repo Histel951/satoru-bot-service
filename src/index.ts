@@ -3,7 +3,23 @@ import { CommandInteraction, Events, IntentsBitField } from "discord.js";
 import * as process from "process";
 
 const intents = new IntentsBitField();
-intents.add(IntentsBitField.Flags.GuildPresences, IntentsBitField.Flags.GuildMembers)
+
+const { Flags } = IntentsBitField;
+
+intents.add(
+    Flags.Guilds,
+    Flags.GuildPresences,
+    Flags.GuildMembers,
+    Flags.GuildModeration,
+    Flags.GuildEmojisAndStickers,
+    Flags.GuildInvites,
+    Flags.GuildMessages,
+    Flags.GuildMessageReactions,
+    Flags.GuildMessageTyping,
+    Flags.DirectMessages,
+    Flags.DirectMessageReactions,
+    Flags.DirectMessageTyping,
+);
 
 const bot = initClient(intents);
 
