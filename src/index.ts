@@ -1,6 +1,7 @@
 import initClient from "@/utils/initClient";
 import { CommandInteraction, Events, IntentsBitField } from "discord.js";
 import * as process from "process";
+import connectToDatabase from "@/database/connect";
 
 const intents = new IntentsBitField();
 
@@ -23,7 +24,8 @@ intents.add(
 
 const bot = initClient(intents);
 
-bot.once(Events.ClientReady, () => {
+bot.once(Events.ClientReady, async () => {
+    void await connectToDatabase();
     void bot.initApplicationCommands();
 
     console.log('Bot started.')
@@ -31,11 +33,11 @@ bot.once(Events.ClientReady, () => {
 
 bot.on(Events.InteractionCreate, (interaction) => {
     if (interaction.isCommand()) {
-        bot.executeCommand(interaction as CommandInteraction);
+        void bot.executeCommand(interaction as CommandInteraction);
     }
 });
 
-async function run() {
+const run = async () => {
     if (!process.env.DISCORD_TOKEN) {
         throw Error("Could not find DISCORD_TOKEN in your environment");
     }

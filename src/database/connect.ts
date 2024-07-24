@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import * as process from "process";
 
 const connectToDatabase = async () => {
     try {

@@ -1,7 +1,7 @@
-import { Document, Schema } from "mongoose";
-import { ITournament } from "../../interfaces/schemas/ITournament";
+import { Schema } from "mongoose";
+import { ITournament } from "@/interfaces/schemas/tournament";
 
-export default new Schema<ITournament & Document>({
+export default new Schema<ITournament>({
     name: { type: String, required: true },
     description: { type: String, required: true },
     imageUrl: { type: String, required: true },

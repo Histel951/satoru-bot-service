@@ -1,7 +1,7 @@
-import { Schema, Types, Document } from "mongoose";
-import { ITeamInvite } from "../../interfaces/schemas/ITeamInvite";
+import { Schema, Types } from "mongoose";
+import { ITeamInvite } from "@/interfaces/schemas/teamInvite";
 
-export default new Schema<ITeamInvite & Document>({
+export default new Schema<ITeamInvite>({
     team_id: {
         type: Types.ObjectId,
         ref: 'Team',

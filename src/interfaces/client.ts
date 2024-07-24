@@ -1,5 +1,5 @@
 import { Client, CommandInteraction } from "discord.js";
-import { CommandI } from "@/interfaces/command/CommandI";
+import { CommandI } from "@/interfaces/commands";
 
 export interface ClientI extends Client {
     applicationCommands: Map<string, CommandI>
