@@ -1,4 +1,4 @@
-import {CommandInteraction, InteractionReplyOptions, InteractionResponse} from "discord.js";
+import { CommandInteraction, InteractionReplyOptions } from "discord.js";
 import { CommandOptionSetCallbackT, MiddlewareT } from "@/types/commands";
 
 export interface MiddlewareResponseI<DataT extends object = {}> {
