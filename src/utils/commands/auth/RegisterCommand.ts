@@ -6,23 +6,24 @@ import registerMember from "@/utils/auth/registerMember";
 import { RegisterMemberQueueMessageT, RegisterMemberQueueT } from "@/types/queues";
 import MiddlewareResponse from "@/utils/commands/MiddlewareResponse";
 
-export default class RegisterCommand extends AbstractCommand<{ dotaId: number|string }> {
+export default class RegisterCommand extends AbstractCommand<{ dotaId: string | number }> {
 
-    async execute(interaction: CommandInteraction, { dotaId }) {
+    async execute(interaction: CommandInteraction, middlewareData) {
         try {
             const response = await rcpRequest<RegisterMemberQueueT, RegisterMemberQueueMessageT>('registerMember', {
                 discordId: interaction.user.id,
-                dotaId,
+                dotaId: middlewareData.dotaId,
             });
 
             await registerMember(interaction, interaction.user.id, response.rank);
         } catch (error) {
             console.error("An error occurred:", error);
 
-            return await interaction.reply({ content: "An error occurred while processing your request.", ephemeral: true });
+            await interaction.reply({ content: "An error occurred while processing your request.", ephemeral: true });
+            return;
         }
 
-        return interaction.reply({
+        await interaction.reply({
             ephemeral: true,
             content: 'Вы успешно зарегистрировались!'
         });

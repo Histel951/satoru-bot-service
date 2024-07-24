@@ -2,9 +2,9 @@ import { CommandI } from "@/interfaces/commands";
 
 export default abstract class AbstractCommand<MiddlewareData extends object = {}> implements CommandI<MiddlewareData> {
 
-    private readonly name: string;
+    readonly name: string;
 
-    private readonly description: string;
+    readonly description: string;
 
     constructor(name: string, description: string) {
         this.name = name;

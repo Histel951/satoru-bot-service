@@ -1,9 +1,8 @@
-import { BitFieldResolvable, Client, CommandInteraction, GatewayIntentsString, REST } from "discord.js";
+import { BitFieldResolvable, Client, CommandInteraction, GatewayIntentsString, REST, Routes } from "discord.js";
 import { ClientI } from "@/interfaces/client";
 import { CommandI } from "@/interfaces/commands";
 import * as process from "process";
 import RegisterCommand from "@/utils/commands/auth/RegisterCommand";
-import { RESTBody } from "@/types/client";
 import { MiddlewareT } from "@/types/commands";
 
 export default (intents: BitFieldResolvable<GatewayIntentsString, number>): ClientI => {
@@ -65,9 +64,9 @@ export default (intents: BitFieldResolvable<GatewayIntentsString, number>): Clie
     });
 
     client.initApplicationCommands = async () => {
-        const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN!);
+        const rest = new REST({ version: '10' }).setToken(process.env['DISCORD_TOKEN']!);
 
-        const body: RESTBody = [];
+        const body = [];
         client.applicationCommands.forEach(command => {
             body.push({
                 name: command.name,
@@ -75,7 +74,7 @@ export default (intents: BitFieldResolvable<GatewayIntentsString, number>): Clie
             });
         });
 
-        await rest.put(`/applications/${process.env.DISCORD_TOKEN!}/commands`, { body })
+        await rest.put(`/applications/${process.env['DISCORD_TOKEN']!}/commands`, { body })
     }
 
     return client;

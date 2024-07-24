@@ -1,4 +1,4 @@
-import { CommandInteraction, InteractionReplyOptions } from "discord.js";
+import {CommandInteraction, InteractionReplyOptions, InteractionResponse} from "discord.js";
 import { CommandOptionSetCallbackT, MiddlewareT } from "@/types/commands";
 
 export interface MiddlewareResponseI<DataT extends object = {}> {
@@ -11,7 +11,7 @@ export interface MiddlewareResponseI<DataT extends object = {}> {
 export interface CommandI<MiddlewareDataT extends object = {}> {
     name: string
     description: string
-    execute?: (interaction: CommandInteraction, middlewareData: MiddlewareDataT) => void
+    execute?: (interaction: CommandInteraction, middlewareData: MiddlewareDataT) => Promise<void>
     middleware?: MiddlewareT<MiddlewareDataT> | MiddlewareT<MiddlewareDataT>[]
     getName: () => string
     getDescription: () => string

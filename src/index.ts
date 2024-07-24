@@ -38,11 +38,11 @@ bot.on(Events.InteractionCreate, (interaction) => {
 });
 
 const run = async () => {
-    if (!process.env.DISCORD_TOKEN) {
+    if (!process.env['DISCORD_TOKEN']) {
         throw Error("Could not find DISCORD_TOKEN in your environment");
     }
 
-    await bot.login(process.env.DISCORD_TOKEN);
+    await bot.login(process.env['DISCORD_TOKEN']);
 }
 
 void run();
